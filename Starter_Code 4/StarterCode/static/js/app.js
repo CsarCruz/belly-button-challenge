@@ -10,7 +10,7 @@ d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1
         .text(d=>d)
         .attr("value",d=>d);
 
-    ChangedValue(d3.select("#selDataset").property("value"));
+    optionChanged(d3.select("#selDataset").property("value"));
 });
 
 // Barchart creation
@@ -33,7 +33,8 @@ function BubbleChart(x,y) {
         mode: 'markers',
         marker: {
           size: y,
-          color: x.map(value=>value)
+          color: x.map(value=>value),
+          colorscale: 'Viridis'
         }
     }];
    
@@ -52,7 +53,7 @@ function Meta(data) {
 }
 
 // Loads data and show all charts
-function ChangedValue(value) {
+function optionChanged(value) {
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then(function(incomingData) {
 
     metadata = incomingData.metadata.filter(data => data.id ==value);
